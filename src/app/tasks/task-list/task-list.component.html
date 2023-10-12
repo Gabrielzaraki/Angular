@@ -12,7 +12,7 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let task of tasks">
-        <app-task-list-item class="task-item" [task]="task"></app-task-list-item>
+        <app-task-list-item class="task-item" [task]="task" (onDeleteTask)="OnTaskDeleted($event)" ></app-task-list-item>
     </li>
   </ul>
 </section>

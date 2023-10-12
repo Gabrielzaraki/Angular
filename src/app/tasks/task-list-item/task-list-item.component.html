@@ -1,7 +1,6 @@
 <div class="form-group form-check">
 
-  <input type="checkbox" class="form-check-input"/>
-
+  <input type="checkbox" class="form-check-input" [(ngModel)] ="task.completed" (change)="OnCompletedCheck(task)" >
 </div>
 
 <div [innerHTML]="task.description" class="task-iatem-description"
@@ -11,7 +10,7 @@
 
 <div>
 
-  <button type="button" [routerLink]="['/edit', task.id]" class="btn btn-primary mr-1">
+  <button type="button" [routerLink]="['/edit', task._id]" class="btn btn-primary mr-1">
 
     Alterar
 
@@ -21,7 +20,7 @@
 
 <div>
 
-  <button type="button" class="btn btn-danger">
+  <button type="button" class="btn btn-danger" (click)="remove(task)">
 
     Excluir
 

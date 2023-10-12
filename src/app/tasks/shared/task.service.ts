@@ -1,20 +1,40 @@
+import { enviroment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { Task } from './task';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  tasks: Task[] = [
-    {id: 1, description: 'Tarefa - 1', completed: false},
-    {id: 2, description: 'Tarefa - 2', completed: true},
-    {id: 3, description: 'Tarefa - 3', completed: true},
-    {id: 4, description: 'Tarefa - 4', completed: false},
+  constructor(private http: HttpClient) { }
 
-  ];
+  getAll() {
+    return this.http.get<Task[]>(`${enviroment.api}/tasks`);
+  }
 
-  constructor() { }
+  getById(id: string) {
+    return this.http.get<Task>(`${enviroment.api}/tasks/${id}`);
+  }
 
-  getAll() {return this.tasks;}
+  save(task: Task) {
+    const taskbody = {
+      description: task.description,
+        completed: task.completed
+    };
+    if (task._id) {
+      return this.http.put<Task>(`${enviroment.api}/tasks/${task._id}`, taskbody);
+
+
+    } else {
+      return this.http.post<Task>(`${enviroment.api}/tasks/`, taskbody);
+
+
+    }
+  }
+
+  delete(id: string) {
+    return this.http.delete(`${enviroment.api}/tasks/${id}`);
+  }
 }

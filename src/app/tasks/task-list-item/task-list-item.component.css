@@ -4,4 +4,5 @@
 
 .task-iatem-description{
   flex-grow: 1;
+  white-space: pre-line;
 }
